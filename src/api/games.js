@@ -2,7 +2,7 @@ const games = require('express').Router();
 const gamesData = require('../data/games');
 const status = require('../utils/statusMessages');
 const { validator } = require('../utils/validator');
-const { getGamesQuery, defaultGameParams } = require('./validation/games');
+const { getGamesQuery, defaultGameParams, postGameBody } = require('./validation/games');
 
 games.get('/', validator.query(getGamesQuery), async (req, res) => {
   const { query: { pageNum, pageSize, playerId } } = req;
@@ -47,6 +47,13 @@ games.get('/:gameId/frames', validator.params(defaultGameParams), async (req, re
   const { params: { gameId } } = req;
 
   const game = await gamesData.getGameFrames(gameId);
+  return status.success(res, { ...game });
+});
+
+games.post('/', validator.body(postGameBody), async (req, res) => {
+  const { body: { data } } = req;
+
+  const game = await gamesData.addGame(data);
   return status.success(res, { ...game });
 });
 

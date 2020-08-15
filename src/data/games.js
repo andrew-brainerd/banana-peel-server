@@ -31,10 +31,15 @@ const getGameFrames = async gameId => {
   return game.getFrames();
 };
 
+const addGame = async gameData => {
+  return await data.insertOne(GAMES_COLLECTION, gameData);
+};
+
 module.exports = {
   getGames,
   getGameSettings,
   getGameMetadata,
   getGameStats,
-  getGameFrames
+  getGameFrames,
+  addGame
 };
