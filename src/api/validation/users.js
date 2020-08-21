@@ -9,7 +9,12 @@ const getUserByEmailQuery = Joi.object({
   email: Joi.string()
 });
 
+const getUserByUsernameQuery = Joi.object({
+  username: Joi.string()
+});
+
 module.exports = {
   postUserBody,
-  getUserByEmailQuery
+  getUserByEmailQuery,
+  getUserByUsernameQuery
 };
