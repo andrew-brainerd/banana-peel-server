@@ -5,9 +5,9 @@ const { validator } = require('../utils/validator');
 const { postUserBody, getUserByEmailQuery, getUserByUsernameQuery } = require('./validation/users');
 
 users.post('/', validator.body(postUserBody), async (req, res) => {
-  const { body: { name, email } } = req;
+  const { body: { name, email, username } } = req;
 
-  const newUser = await usersData.createUser({ name, email });
+  const newUser = await usersData.createUser({ name, email, username });
   if (!newUser) return status.serverError(res, 'Failed', `Failed to create user [${name}]`);
 
   return status.created(res, { ...newUser });
