@@ -22,31 +22,10 @@ games.get('/', validator.query(getGamesQuery), async (req, res) => {
   });
 });
 
-games.get('/:gameId/settings', validator.params(defaultGameParams), async (req, res) => {
+games.get('/:gameId', validator.params(defaultGameParams), async (req, res) => {
   const { params: { gameId } } = req;
 
-  const game = await gamesData.getGameSettings(gameId);
-  return status.success(res, { ...game });
-});
-
-games.get('/:gameId/metadata', validator.params(defaultGameParams), async (req, res) => {
-  const { params: { gameId } } = req;
-
-  const game = await gamesData.getGameMetadata(gameId);
-  return status.success(res, { ...game });
-});
-
-games.get('/:gameId/stats', validator.params(defaultGameParams), async (req, res) => {
-  const { params: { gameId } } = req;
-
-  const game = await gamesData.getGameStats(gameId);
-  return status.success(res, { ...game });
-});
-
-games.get('/:gameId/frames', validator.params(defaultGameParams), async (req, res) => {
-  const { params: { gameId } } = req;
-
-  const game = await gamesData.getGameFrames(gameId);
+  const game = await gamesData.getGame(gameId);
   return status.success(res, { ...game });
 });
 

@@ -42,7 +42,7 @@ const insertOne = async (collectionName, document) => {
   });
 };
 
-const getSome = async (collectionName, page, size, identifier, idValue) => {
+const getSome = async (collectionName, page, size, identifier, idValue, projection ={}) => {
   const collection = db.collection(collectionName);
   const totalItems = await collection.countDocuments({});
   const totalPages = calculateTotalPages(totalItems, size);
@@ -51,6 +51,7 @@ const getSome = async (collectionName, page, size, identifier, idValue) => {
     const query = identifier && idValue ? { [identifier]: idValue } : {};
     collection
       .find(query)
+      .project(projection)
       .skip(size * (page - 1))
       .limit(size)
       .sort({ $natural: -1 })
