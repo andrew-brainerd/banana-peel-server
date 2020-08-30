@@ -3,7 +3,7 @@ const Joi = require('joi');
 const getGamesQuery = Joi.object({
   pageNum: Joi.number(),
   pageSize: Joi.number(),
-  username: Joi.string().required()
+  connectCode: Joi.string().required()
 });
 
 const defaultGameParams = Joi.object({

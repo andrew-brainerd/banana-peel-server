@@ -5,11 +5,11 @@ const { validator } = require('../utils/validator');
 const { getGamesQuery, defaultGameParams, postGameBody } = require('./validation/games');
 
 games.get('/', validator.query(getGamesQuery), async (req, res) => {
-  const { query: { pageNum, pageSize, username } } = req;
+  const { query: { pageNum, pageSize, connectCode } } = req;
   const page = parseInt(pageNum) || 1;
   const size = parseInt(pageSize) || 50;
 
-  const { items, totalItems, totalPages } = await gamesData.getGames(page, size, username);
+  const { items, totalItems, totalPages } = await gamesData.getGames(page, size, connectCode);
 
   if (!items) return status.serverError(res, 'Failed', 'Failed to get games');
 

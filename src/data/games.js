@@ -2,14 +2,14 @@ const data = require('../utils/data');
 const log = require('../utils/log');
 const { GAMES_COLLECTION } = require('../constants/collections');
 
-const getGames = async (page, size, username) => {
-  log.cool(`Get Games for ${username}`);
+const getGames = async (page, size, connectCode) => {
+  log.cool(`Get Games for ${connectCode}`);
   return await data.getSome(
     GAMES_COLLECTION,
     page,
     size,
-    'username',
-    username,
+    'connectCode',
+    connectCode,
     { frames: 0 },
     { gameId: -1 }
   );
