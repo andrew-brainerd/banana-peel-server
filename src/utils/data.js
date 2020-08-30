@@ -42,10 +42,11 @@ const insertOne = async (collectionName, document) => {
   });
 };
 
-const getSome = async (collectionName, page, size, identifier, idValue, projection ={}) => {
+const getSome = async (collectionName, page, size, identifier, idValue, projection = {}, sort = {}) => {
   const collection = db.collection(collectionName);
   const totalItems = await collection.countDocuments({});
   const totalPages = calculateTotalPages(totalItems, size);
+  const sorting = sort || { $natural: -1 };
 
   return new Promise((resolve, reject) => {
     const query = identifier && idValue ? { [identifier]: idValue } : {};
@@ -54,7 +55,7 @@ const getSome = async (collectionName, page, size, identifier, idValue, projecti
       .project(projection)
       .skip(size * (page - 1))
       .limit(size)
-      .sort({ $natural: -1 })
+      .sort(sorting)
       .toArray((err, items) => {
         err ? reject(err) : resolve({
           items,

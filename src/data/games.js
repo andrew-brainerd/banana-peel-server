@@ -4,7 +4,15 @@ const { GAMES_COLLECTION } = require('../constants/collections');
 
 const getGames = async (page, size, username) => {
   log.cool(`Get Games for ${username}`);
-  return await data.getSome(GAMES_COLLECTION, page, size, 'username', username, { frames: 0 });
+  return await data.getSome(
+    GAMES_COLLECTION,
+    page,
+    size,
+    'username',
+    username,
+    { frames: 0 },
+    { gameId: -1 }
+  );
 };
 
 const getGame = async gameId => {
