@@ -1,6 +1,6 @@
 
-const GAMES_COLLECTION = 'bananaPeelGames';
-const USERS_COLLECTION = 'bananaPeelUsers';
+const GAMES_COLLECTION = 'games';
+const USERS_COLLECTION = 'users';
 
 module.exports = {
   GAMES_COLLECTION,
