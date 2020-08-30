@@ -17,11 +17,11 @@ const getGames = async (page, size, username) => {
 
 const getGame = async gameId => {
   log.cool(`Get Game ${gameId}`);
-  return await data.getById(GAMES_COLLECTION, gameId);
+  return await data.getByProperty(GAMES_COLLECTION, 'gameId', gameId);
 };
 
 const addGame = async gameData => {
-  log.cool(`Add Game ${Object.keys((gameData || {}).metadata)}`);
+  log.cool(`Add Game ${(gameData || {}).gameId}`);
   return await data.insertOne(GAMES_COLLECTION, gameData);
 };
 
