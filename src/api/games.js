@@ -22,10 +22,17 @@ games.get('/', validator.query(getGamesQuery), async (req, res) => {
   });
 });
 
-games.get('/:gameId', validator.params(defaultGameParams), async (req, res) => {
+games.get('/id/:gameId', validator.params(defaultGameParams), async (req, res) => {
   const { params: { gameId } } = req;
 
-  const game = await gamesData.getGame(gameId);
+  const game = await gamesData.getGameById(gameId);
+  return status.success(res, { ...game });
+});
+
+games.get('/gameId/:gameId', validator.params(defaultGameParams), async (req, res) => {
+  const { params: { gameId } } = req;
+
+  const game = await gamesData.getGameByGameId(gameId);
   return status.success(res, { ...game });
 });
 

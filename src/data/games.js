@@ -15,8 +15,13 @@ const getGames = async (page, size, connectCode) => {
   );
 };
 
-const getGame = async gameId => {
-  log.cool(`Get Game ${gameId}`);
+const getGameById = async gameId => {
+  log.cool(`Get Game with ID ${gameId}`);
+  return await data.getById(GAMES_COLLECTION, gameId);
+};
+
+const getGameByGameId = async gameId => {
+  log.cool(`Get Game with Game ID ${gameId}`);
   return await data.getByProperty(GAMES_COLLECTION, 'gameId', gameId);
 };
 
@@ -27,6 +32,7 @@ const addGame = async gameData => {
 
 module.exports = {
   getGames,
-  getGame,
+  getGameById,
+  getGameByGameId,
   addGame
 };
